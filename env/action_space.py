@@ -20,9 +20,7 @@ class GameBoyAction(IntEnum):
     DOWN = 3
     LEFT = 4
     RIGHT = 5
-    START = 6
-    SELECT = 7
-    NOOP = 8
+
 
 
 # Total number of discrete actions
@@ -40,9 +38,6 @@ ACTION_TO_PYBOY_EVENTS: Dict[int, tuple] = {
     GameBoyAction.DOWN:   (WindowEvent.PRESS_ARROW_DOWN,    WindowEvent.RELEASE_ARROW_DOWN),
     GameBoyAction.LEFT:   (WindowEvent.PRESS_ARROW_LEFT,    WindowEvent.RELEASE_ARROW_LEFT),
     GameBoyAction.RIGHT:  (WindowEvent.PRESS_ARROW_RIGHT,   WindowEvent.RELEASE_ARROW_RIGHT),
-    GameBoyAction.START:  (WindowEvent.PRESS_BUTTON_START,  WindowEvent.RELEASE_BUTTON_START),
-    GameBoyAction.SELECT: (WindowEvent.PRESS_BUTTON_SELECT, WindowEvent.RELEASE_BUTTON_SELECT),
-    GameBoyAction.NOOP:   (None, None),  # No-op: no button pressed
 }
 
 

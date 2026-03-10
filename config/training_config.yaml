@@ -6,7 +6,7 @@
 env:
   rom_path: "roms/pokemon_blue.gb"
   render_mode: "headless"          # "headless" | "human"
-  frame_skip: 4                    # Number of frames to skip per action
+  frame_skip: 16                   # Number of frames to skip per action
   frame_stack: 4                   # Number of frames to stack as observations
   screen_width: 84
   screen_height: 84
@@ -22,7 +22,7 @@ dqn:
   epsilon_end: 0.05                # Minimum exploration rate
   epsilon_decay: 500000            # Steps over which epsilon is annealed
   target_update_freq: 1000         # Steps between target network syncs
-  replay_buffer_size: 100000
+  replay_buffer_size: 30000
   min_replay_size: 10000           # Steps before training begins
   train_freq: 4                    # Train every N steps
   gradient_clip: 10.0              # Max gradient norm

@@ -136,6 +136,7 @@ def train(config: dict) -> None:
                 tiles_visited=exp_stats["tiles_visited"],
                 maps_visited=exp_stats["maps_visited"],
             )
+            
 
             tb_logger.scalars(
                 {

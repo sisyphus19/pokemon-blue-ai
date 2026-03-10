@@ -1,7 +1,11 @@
 """
 pokemon_env.py
 --------------
+
 Gymnasium-compatible environment for Pokémon Blue.
+
+Uses a pre-generated savestate so every episode starts directly
+inside the game world instead of the title screen.
 """
 
 import logging
@@ -46,6 +50,7 @@ class PokemonBlueEnv(gym.Env):
     def __init__(
         self,
         rom_path: str = "roms/pokemon_blue.gb",
+        savestate_path: str = "assets/start.state",
         render_mode: Optional[str] = None,
         frame_skip: int = 4,
         frame_stack: int = 4,
@@ -59,6 +64,7 @@ class PokemonBlueEnv(gym.Env):
         super().__init__()
 
         self.rom_path = rom_path
+        self.savestate_path = savestate_path
         self.render_mode = render_mode
         self.frame_skip = frame_skip
         self.max_steps = max_steps
@@ -86,7 +92,6 @@ class PokemonBlueEnv(gym.Env):
         reward_config = RewardConfig.from_dict(reward_cfg) if reward_cfg else RewardConfig()
         self._reward_system = RewardSystem(reward_config)
 
-        # Emulator instance
         self._pyboy: Optional[Any] = None
 
         self._step_count = 0
@@ -105,7 +110,7 @@ class PokemonBlueEnv(gym.Env):
 
         super().reset(seed=seed)
 
-        # Close previous emulator
+        # Close emulator if running
         if self._pyboy is not None:
             self._pyboy.stop()
             self._pyboy = None
@@ -114,37 +119,40 @@ class PokemonBlueEnv(gym.Env):
         self._pyboy = load_emulator(self.rom_path, headless=self._headless)
 
         # ---------------------------------------------------------
-        # Boot and skip start screen
+        # Load savestate
         # ---------------------------------------------------------
 
+        with open(self.savestate_path, "rb") as f:
+            self._pyboy.load_state(f)
+
         from pyboy.utils import WindowEvent
-
-        # Allow emulator boot
-        for _ in range(120):
-            self._pyboy.tick()
-
-        # Press START
-        self._pyboy.send_input(WindowEvent.PRESS_BUTTON_START)
-        self._pyboy.tick()
-        self._pyboy.send_input(WindowEvent.RELEASE_BUTTON_START)
-
-        # Wait for menu
-        for _ in range(30):
-            self._pyboy.tick()
-
-        # Select NEW GAME
-        self._pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
-        self._pyboy.tick()
-        self._pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
-
-        # Skip intro dialogue
-        for _ in range(200):
+        
+        # Clear any pending dialogue or event flag
+        for _ in range(15):
             self._pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
             self._pyboy.tick()
             self._pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+            self._pyboy.tick()
+        
+        # Advance frames so overworld logic resumes
+        for _ in range(60):
+            self._pyboy.tick()
 
-        # Allow world to load
-        for _ in range(120):
+        # advance a few frames so emulator stabilizes
+        for _ in range(10):
+            self._pyboy.tick()
+
+        from pyboy.utils import WindowEvent
+        
+        # Clear any pending dialogue that might block movement
+        for _ in range(20):
+            self._pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+            self._pyboy.tick()
+            self._pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+            self._pyboy.tick()
+        
+        # Let the overworld engine stabilise
+        for _ in range(60):
             self._pyboy.tick()
 
         # ---------------------------------------------------------
@@ -182,6 +190,8 @@ class PokemonBlueEnv(gym.Env):
             release_event,
             hold_frames=self.frame_skip,
         )
+        for _ in range(8):
+            self._pyboy.tick()
 
         raw_frame = get_screen_array(self._pyboy)
         processed = self._processor.process(raw_frame)
@@ -225,7 +235,11 @@ class PokemonBlueEnv(gym.Env):
         if self._pyboy is not None:
             self._pyboy.stop()
             self._pyboy = None
-            logger.info("Emulator closed after episode %d.", self._episode)
+
+            logger.info(
+                "Emulator closed after episode %d.",
+                self._episode,
+            )
 
     # -------------------------------------------------------------
 
