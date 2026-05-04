@@ -1,9 +1,5 @@
-"""
-evaluate.py
------------
-Evaluates a trained Pokémon Blue agent deterministically and saves
-performance metrics and exploration maps.
-"""
+
+# evaluate agent and save performance
 
 import argparse
 import logging
@@ -27,7 +23,6 @@ def load_config(config_path: str) -> dict:
 
 
 def evaluate(config: dict, model_path: str, num_episodes: int) -> None:
-    """Run deterministic evaluation episodes."""
     env = PokemonBlueEnv(
         rom_path=config["env"]["rom_path"],
         render_mode="headless",

@@ -1,8 +1,5 @@
-# ============================================================
-# Pokémon Blue RL Agent - Training Configuration
-# ============================================================
 
-# --- Environment ---
+#  Environment 
 env:
   rom_path: "roms/pokemon_blue.gb"
   render_mode: "headless"          # "headless" | "human"
@@ -13,7 +10,7 @@ env:
   grayscale: true
   max_steps_per_episode: 10000 # ~5.5 minutes of gameplay at 60 fps / frame_skip 4
 
-# --- DQN Hyperparameters ---
+# DQN Hyperparameters 
 dqn:
   learning_rate: 0.0001
   batch_size: 64
@@ -27,7 +24,7 @@ dqn:
   train_freq: 4                    # Train every N steps
   gradient_clip: 10.0              # Max gradient norm
 
-# --- Neural Network ---
+# Neural Network 
 network:
   conv_channels: [32, 64, 64]
   conv_kernels: [8, 4, 3]
@@ -35,7 +32,7 @@ network:
   fc_units: 512
   dueling_dqn: false               # Enable dueling network architecture
 
-# --- Training Loop ---
+# Training Loop 
 training:
   total_timesteps: 2000000
   num_episodes: 5000
@@ -47,7 +44,7 @@ training:
   log_dir: "experiments/training_logs"
   experiment_name: "dqn_pokemon_blue_v1"
 
-# --- Reward Shaping ---
+# Reward Shaping 
 rewards:
   explore_new_tile: 1.0
   explore_new_map: 5.0
@@ -60,12 +57,12 @@ rewards:
   step_penalty: -0.01
   heal_pokemon: 2.0
 
-# --- Curiosity / Exploration ---
+# Curiosity 
 curiosity:
   enabled: false
   beta: 0.2                        # Weighting of intrinsic vs extrinsic reward
 
-# --- PPO (optional) ---
+# PPO 
 ppo:
   learning_rate: 0.00025
   n_steps: 2048

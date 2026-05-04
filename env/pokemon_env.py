@@ -1,12 +1,5 @@
-"""
-pokemon_env.py
---------------
+#Uses a pre-generated savestate so every episode starts directly
 
-Gymnasium-compatible environment for Pokémon Blue.
-
-Uses a pre-generated savestate so every episode starts directly
-inside the game world instead of the title screen.
-"""
 
 import logging
 from typing import Any, Dict, Optional, Tuple
@@ -99,7 +92,6 @@ class PokemonBlueEnv(gym.Env):
         self._prev_state: Optional[GameState] = None
         self._total_reward = 0.0
 
-    # -------------------------------------------------------------
 
     def reset(
         self,
@@ -117,10 +109,6 @@ class PokemonBlueEnv(gym.Env):
 
         # Launch emulator
         self._pyboy = load_emulator(self.rom_path, headless=self._headless)
-
-        # ---------------------------------------------------------
-        # Load savestate
-        # ---------------------------------------------------------
 
         with open(self.savestate_path, "rb") as f:
             self._pyboy.load_state(f)
@@ -155,8 +143,6 @@ class PokemonBlueEnv(gym.Env):
         for _ in range(60):
             self._pyboy.tick()
 
-        # ---------------------------------------------------------
-
         self._step_count = 0
         self._episode += 1
         self._total_reward = 0.0
@@ -172,8 +158,6 @@ class PokemonBlueEnv(gym.Env):
         self._prev_state = GameState(**state_dict)
 
         return obs, self._build_info()
-
-    # -------------------------------------------------------------
 
     def step(
         self,
@@ -216,8 +200,6 @@ class PokemonBlueEnv(gym.Env):
 
         return obs, reward, terminated, truncated, info
 
-    # -------------------------------------------------------------
-
     def render(self):
 
         if self._pyboy is None:
@@ -227,8 +209,6 @@ class PokemonBlueEnv(gym.Env):
             return get_screen_array(self._pyboy)
 
         return None
-
-    # -------------------------------------------------------------
 
     def close(self):
 
@@ -241,16 +221,13 @@ class PokemonBlueEnv(gym.Env):
                 self._episode,
             )
 
-    # -------------------------------------------------------------
-
+ 
     def _is_terminated(self, state: GameState):
 
         if state.party_hp and all(hp == 0 for hp in state.party_hp):
             return True
 
         return False
-
-    # -------------------------------------------------------------
 
     def _build_info(self):
 
@@ -262,8 +239,6 @@ class PokemonBlueEnv(gym.Env):
             "total_reward": self._total_reward,
             **exploration,
         }
-
-    # -------------------------------------------------------------
 
     @property
     def exploration_stats(self):

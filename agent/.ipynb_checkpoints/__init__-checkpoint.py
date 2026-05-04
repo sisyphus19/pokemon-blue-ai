@@ -1,4 +1,4 @@
-"""Agent package init."""
+"""Agent package init"""
 
 from agent.neural_network import NatureCNN, DQNNetwork, DuelingDQNNetwork
 from agent.replay_buffer import ReplayBuffer

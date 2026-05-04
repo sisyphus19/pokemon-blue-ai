@@ -1,13 +1,5 @@
-"""
-neural_network.py
------------------
-PyTorch neural network architectures for Q-learning.
-
-Provides:
-  - Base CNN module for processing image observations
-  - Standard DQN network head
-  - Dueling DQN network head (optional improvement)
-"""
+# neural network for Deep Q learning
+# for img proc, standard DQN network head
 
 from typing import Tuple
 
@@ -16,15 +8,8 @@ import torch.nn as nn
 
 
 def _calc_conv_output_dim(input_shape: Tuple[int, int, int], net: nn.Sequential) -> int:
-    """Helper to calculate the flattened size of a convolutional network's output.
+    # calculate flattened size of a Convo network output
 
-    Args:
-        input_shape: (C, H, W) of the input tensor.
-        net: Convolutional nn.Sequential block.
-
-    Returns:
-        Flattened dimension size (C * H * W).
-    """
     with torch.no_grad():
         dummy = torch.zeros(1, *input_shape)
         out = net(dummy)
@@ -32,10 +17,6 @@ def _calc_conv_output_dim(input_shape: Tuple[int, int, int], net: nn.Sequential)
 
 
 class NatureCNN(nn.Module):
-    """Convolutional encoder matching the original DeepMind 'Nature' paper.
-
-    Expects input shape matching the frame-stacked observation (e.g., 4x84x84).
-    """
 
     def __init__(self, input_shape: Tuple[int, int, int], output_dim: int = 512):
         super().__init__()
@@ -58,21 +39,13 @@ class NatureCNN(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass.
-
-        Args:
-            x: Normalised observation tensor [B, C, H, W] in range [0, 1].
-
-        Returns:
-            Feature embeddings [B, output_dim].
-        """
         x = self.features(x)
         x = x.view(x.size(0), -1)  # Flatten
         return self.fc(x)
 
 
 class DQNNetwork(nn.Module):
-    """Standard DQN architecture: CNN encoder + Linear action-value head."""
+    # CNN encoder + linear action-value head
 
     def __init__(
         self,
@@ -84,26 +57,12 @@ class DQNNetwork(nn.Module):
         self.encoder = NatureCNN(input_shape, fc_units)
         self.q_head = nn.Linear(fc_units, num_actions)
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Compute Q-values for all actions.
-
-        Args:
-            x: Normalised image tensor [B, C, H, W] in range [0, 1].
-
-        Returns:
-            Action values [B, num_actions].
-        """
+    def forward(self, x: torch.Tensor) -> torch.Tensor: # compute Q value for all actions
         features = self.encoder(x)
         return self.q_head(features)
 
 
 class DuelingDQNNetwork(nn.Module):
-    """Dueling DQN architecture.
-
-    Separates value estimation V(s) from advantage estimation A(s, a)
-    to improve learning stability across many similar-value actions.
-    Q(s, a) = V(s) + A(s, a) - mean(A(s, a'))
-    """
 
     def __init__(
         self,
@@ -128,14 +87,6 @@ class DuelingDQNNetwork(nn.Module):
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Compute Q-values via dueling aggregation.
-
-        Args:
-            x: Normalised image tensor [B, C, H, W].
-
-        Returns:
-            Action values [B, num_actions].
-        """
         features = self.encoder(x)
 
         value = self.value_stream(features)          # [B, 1]

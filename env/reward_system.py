@@ -45,11 +45,6 @@ class RewardSystem:
         self._visited_maps: Set[int] = set()
 
     def reset(self) -> None:
-        """
-        Reset per-episode state.
-
-        NOTE: exploration memory intentionally persists across episodes.
-        """
         pass
 
     def compute(self, prev: GameState, curr: GameState) -> float:
@@ -88,13 +83,13 @@ class RewardSystem:
 
             reward += level_gain * cfg.level_up
 
-        # --- Trainer defeats ---
+        # Trainer defeats 
         trainer_gain = curr.num_trainers_defeated - prev.num_trainers_defeated
 
         if trainer_gain > 0:
             reward += trainer_gain * cfg.defeat_trainer
 
-        # --- Battle result ---
+        # Battle result 
         if not prev.in_battle and not curr.in_battle:
 
             if curr.battle_result == 1:
@@ -103,7 +98,7 @@ class RewardSystem:
             elif curr.battle_result == -1:
                 reward += cfg.lose_battle
 
-        # --- Pokémon fainted ---
+        # Pokémon fainted 
         if curr.party_hp and prev.party_hp:
 
             fainted = sum(

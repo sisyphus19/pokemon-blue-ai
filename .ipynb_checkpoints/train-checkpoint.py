@@ -1,12 +1,5 @@
-"""
-train.py
---------
-Entry point for training the Pokémon Blue DQN agent.
 
-Initialises the environment, loads the configuration, and runs the
-main experience collection and gradient descent loop.
-"""
-
+# initialize env and loag config, then run exp and gradient descent storage
 import argparse
 import logging
 import time
@@ -25,13 +18,11 @@ logger = logging.getLogger(__name__)
 
 
 def load_config(config_path: str) -> dict:
-    """Load YAML configuration."""
     with open(config_path, "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
 
 
 def train(config: dict) -> None:
-    """Main training loop."""
     train_cfg = config["training"]
     log_dir = Path(train_cfg["log_dir"]) / train_cfg["experiment_name"]
     model_dir = Path(train_cfg["checkpoint_dir"]) / train_cfg["experiment_name"]
@@ -72,7 +63,7 @@ def train(config: dict) -> None:
         logger.info("Resuming from %s", latest_checkpoint)
         agent.load(str(latest_checkpoint))
 
-    # --- Training Loop ---
+    # Training Loop 
     start_time = time.time()
     total_steps = agent.global_step
     
@@ -102,9 +93,6 @@ def train(config: dict) -> None:
             if loss is not None:
                 episode_losses.append(loss)
 
-        # -------------------------------------------------------------
-        # Episode End: Logging & Checkpointing
-        # -------------------------------------------------------------
         avg_loss = float(np.mean(episode_losses)) if episode_losses else 0.0
         exp_stats = env.exploration_stats
         

@@ -1,9 +1,3 @@
-"""
-replay_buffer.py
-----------------
-Experience replay memory for DQN to decorrelate training transitions.
-Handles transitions: (state, action, reward, next_state, done)
-"""
 
 from typing import Dict, Tuple
 
@@ -12,13 +6,6 @@ import torch
 
 
 class ReplayBuffer:
-    """Fixed-size cyclic buffer to store and sample transitions.
-
-    Args:
-        capacity: Maximum number of transitions to hold.
-        obs_shape: Shape of the observation space (C, H, W).
-        device: PyTorch device to move sampled batches to.
-    """
 
     def __init__(
         self,
@@ -47,15 +34,7 @@ class ReplayBuffer:
         next_obs: np.ndarray,
         done: bool,
     ) -> None:
-        """Insert a single transition into the buffer, overwriting oldest if full.
-
-        Args:
-            obs: state (uint8 array).
-            action: action index.
-            reward: scalar reward.
-            next_obs: next state (uint8 array).
-            done: whether the episode terminated.
-        """
+        
         self.obs[self.index] = obs
         self.actions[self.index] = action
         self.rewards[self.index] = reward
@@ -66,15 +45,7 @@ class ReplayBuffer:
         self.size = min(self.size + 1, self.capacity)
 
     def sample(self, batch_size: int) -> Dict[str, torch.Tensor]:
-        """Sample a randomised batch of transitions.
 
-        Args:
-            batch_size: Number of transitions to return.
-
-        Returns:
-            Dictionary mapping keys to PyTorch tensors on the configured format/device.
-            Note: Observations are upcast from uint8 to float32 and normalised to [0,1].
-        """
         assert self.size >= batch_size, "Not enough transitions to sample."
 
         # Randomly pick indices

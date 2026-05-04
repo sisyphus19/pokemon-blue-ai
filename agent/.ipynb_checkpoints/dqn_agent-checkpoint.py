@@ -1,15 +1,5 @@
-"""
-dqn_agent.py
-------------
-Implementation of the Deep Q-Network logic.
-
-Capabilities:
-  - Epsilon-greedy action selection
-  - Experience accumulation
-  - PyTorch training loop across mini-batches
-  - Hard target network updates
-  - Model checkpointing
-"""
+# Implements DQN logic
+# Epislon greedy action sel, experience, training loop
 
 import math
 import logging
@@ -28,20 +18,9 @@ from agent.replay_buffer import ReplayBuffer
 logger = logging.getLogger(__name__)
 
 
-class DQNAgent:
-    """The Deep Q-Network Agent.
-
-    Handles action selection, buffer management, gradient descent,
-    and target network synchronisation.
-    """
+class DQNAgent: # For handling action selection, gradient descent etc
 
     def __init__(self, config: Dict[str, Any], env_info: Dict[str, Any]):
-        """Initialisation.
-
-        Args:
-            config: Agent configuration (typically loaded from YAML).
-            env_info: Contains at least "obs_shape" and "num_actions".
-        """
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         logger.info("DQNAgent initialising on device: %s", self.device)
 
@@ -61,14 +40,14 @@ class DQNAgent:
         self.gradient_clip = cfg["gradient_clip"]
 
         # Neural Networks
-        use_dueling = config["network"].get("dueling_dqn", False)
+        # use_dueling = config["network"].get("dueling_dqn", False)
         fc_units = config["network"].get("fc_units", 512)
-        NetworkClass = DuelingDQNNetwork if use_dueling else DQNNetwork
+        NetworkClass = DQNNetwork
 
         self.policy_net = NetworkClass(self.obs_shape, self.num_actions, fc_units).to(self.device)
         self.target_net = NetworkClass(self.obs_shape, self.num_actions, fc_units).to(self.device)
 
-        # Clone weights to target initially and freeze target gradients
+        # Clone weights to target at first and freeze target gradients
         self.target_net.load_state_dict(self.policy_net.state_dict())
         self.target_net.eval()
         for param in self.target_net.parameters():
@@ -76,7 +55,7 @@ class DQNAgent:
 
         self.optimizer = optim.Adam(self.policy_net.parameters(), lr=cfg["learning_rate"])
         
-        # Loss function (Huber loss is standard for DQN to combat outliers)
+        # Loss function (Huber loss)
         self.loss_fn = F.smooth_l1_loss
 
         # Replay Buffer
@@ -89,16 +68,9 @@ class DQNAgent:
         self.global_step: int = 0
         self.epsilon: float = self.epsilon_start
 
-    def select_action(self, obs: np.ndarray, deterministic: bool = False) -> int:
-        """Select an action using an epsilon-greedy policy.
+    def select_action(self, obs: np.ndarray, deterministic: bool = False) -> int: 
+        #Select action using epsilon-greedy policy
 
-        Args:
-            obs: Observation numpy array (uint8).
-            deterministic: If True, bypass randomness (epsilon=0).
-
-        Returns:
-            Chosen action index.
-        """
         # Linear epsilon decay
         if not deterministic:
             fraction = min(1.0, float(self.global_step) / self.epsilon_decay)
@@ -127,16 +99,11 @@ class DQNAgent:
         next_obs: np.ndarray,
         done: bool,
     ) -> None:
-        """Deposit a transition into the replay memory and bump global step."""
         self.replay_buffer.add(obs, action, reward, next_obs, done)
         self.global_step += 1
 
-    def train_step(self) -> float | None:
-        """Sample a batch and perform one gradient descent iteration.
+    def train_step(self) -> float | None: # Sample one batch, then gradient descent (one iter)
 
-        Returns:
-            Scalar loss value, or None if the buffer is too small or it isn't time.
-        """
         if len(self.replay_buffer) < self.min_replay_size:
             return None
 
