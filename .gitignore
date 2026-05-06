@@ -1,5 +1,12 @@
-"roms/*.ram" 
-roms/
+venv/
+__pycache__/
+*.pt
+*.ram
 *.gb
 *.gba
 *.gbc
+
+roms/
+experiments/
+
+.ipynb_checkpoints/
