@@ -1,2 +1,5 @@
-"roms/*.gb" 
 "roms/*.ram" 
+roms/
+*.gb
+*.gba
+*.gbc
