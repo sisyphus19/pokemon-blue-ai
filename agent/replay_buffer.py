@@ -58,10 +58,10 @@ class ReplayBuffer:
         b_next_obs = self.next_obs[indices]
         b_dones = self.dones[indices]
 
-        # Convert to PyTorch tensors & move to device
-        # Normalise observations from [0, 255] uint8 -> [0.0, 1.0] float32
-        t_obs = torch.as_tensor(b_obs, dtype=torch.float32, device=self.device) / 255.0
-        t_next = torch.as_tensor(b_next_obs, dtype=torch.float32, device=self.device) / 255.0
+        # Convert to PyTorch tensors & move to device.
+        # Normalisation (/255.0) is handled by Encoder.forward() — return raw float32.
+        t_obs = torch.as_tensor(b_obs, dtype=torch.float32, device=self.device)
+        t_next = torch.as_tensor(b_next_obs, dtype=torch.float32, device=self.device)
 
         return {
             "obs": t_obs,

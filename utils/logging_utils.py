@@ -64,7 +64,10 @@ class EpisodeLogger:
         "total_reward",
         "episode_length",
         "epsilon",
-        "loss",
+        "rl_loss",
+        "ssl_loss",
+        "total_loss",
+        "loss",  # kept for backward compatibility (same as total_loss)
         "tiles_visited",
         "maps_visited",
         "timestamp",
@@ -84,6 +87,9 @@ class EpisodeLogger:
         total_reward: float,
         episode_length: int,
         epsilon: float,
+        rl_loss: Optional[float] = None,
+        ssl_loss: Optional[float] = None,
+        total_loss: Optional[float] = None,
         loss: Optional[float] = None,
         tiles_visited: int = 0,
         maps_visited: int = 0,
@@ -95,16 +101,26 @@ class EpisodeLogger:
             total_reward: Cumulative reward for the episode.
             episode_length: Number of steps in the episode.
             epsilon: Current exploration rate.
-            loss: Average training loss (None if not yet training).
+            rl_loss: Average reinforcement learning loss.
+            ssl_loss: Average self-supervised forward model loss.
+            total_loss: Average total combined loss.
+            loss: Average training loss (legacy field, mapped to total_loss).
             tiles_visited: Cumulative unique tiles visited.
             maps_visited: Cumulative unique maps visited.
         """
+        # Ensure 'loss' field matches 'total_loss' if not explicitly provided
+        final_total = total_loss if total_loss is not None else loss
+        final_legacy = loss if loss is not None else total_loss
+
         row = {
             "episode": episode,
             "total_reward": round(total_reward, 4),
             "episode_length": episode_length,
             "epsilon": round(epsilon, 6),
-            "loss": round(loss, 6) if loss is not None else "",
+            "rl_loss": round(rl_loss, 6) if rl_loss is not None else "",
+            "ssl_loss": round(ssl_loss, 6) if ssl_loss is not None else "",
+            "total_loss": round(final_total, 6) if final_total is not None else "",
+            "loss": round(final_legacy, 6) if final_legacy is not None else "",
             "tiles_visited": tiles_visited,
             "maps_visited": maps_visited,
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),

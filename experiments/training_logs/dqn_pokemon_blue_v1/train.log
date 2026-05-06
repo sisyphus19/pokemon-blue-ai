@@ -509,3 +509,241 @@
 2026-04-07 23:35:27 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
 2026-04-07 23:35:27 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
 2026-04-07 23:36:11 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-04 22:00:45 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-04 22:00:47 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-04 22:00:47 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-04 22:00:47 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-04 22:00:52 | INFO     | __main__ | Resuming from models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:00:52 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 192300)
+2026-05-04 22:00:52 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:03:09 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-04 22:03:09 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:03:09 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:06:49 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00002.pt
+2026-05-04 22:06:49 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:06:49 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:07:30 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00003.pt
+2026-05-04 22:07:30 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:07:30 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:07:42 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00004.pt
+2026-05-04 22:07:42 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:07:42 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:09:23 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-04 22:54:41 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-04 22:54:42 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-04 22:54:42 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-04 22:54:42 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-04 22:54:45 | INFO     | __main__ | Resuming from models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:54:45 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 211940)
+2026-05-04 22:54:45 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 22:57:21 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-04 22:57:21 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 22:57:24 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:02:52 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00002.pt
+2026-05-04 23:02:52 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:02:58 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:09:32 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00003.pt
+2026-05-04 23:09:32 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:09:38 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:15:17 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00004.pt
+2026-05-04 23:15:17 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:15:24 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:21:02 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00005.pt
+2026-05-04 23:21:02 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:21:09 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:26:49 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00006.pt
+2026-05-04 23:26:49 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:26:57 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-04 23:32:22 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00007.pt
+2026-05-04 23:32:22 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-04 23:32:28 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 19:49:34 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 19:49:34 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 19:49:34 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 19:49:34 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 19:49:38 | INFO     | __main__ | Resuming from models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 19:49:38 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 281940)
+2026-05-05 19:49:38 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 19:52:34 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 19:52:34 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 19:52:38 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 19:54:00 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 19:54:16 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 19:54:16 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 19:54:16 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 19:54:16 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 19:54:17 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:00:50 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:00:50 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:00:50 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:00:50 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:00:53 | INFO     | __main__ | Resuming from models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:03:56 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:03:56 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:03:56 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:03:56 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:03:59 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:05:51 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:05:51 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:05:55 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:06:14 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:11:35 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:11:36 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:11:36 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:11:36 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:11:36 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.100)
+2026-05-05 20:13:25 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:13:25 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:13:25 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:13:25 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:13:25 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.100)
+2026-05-05 20:13:28 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 10000)
+2026-05-05 20:13:28 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:14:12 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:14:22 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:14:22 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:14:22 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:14:22 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:14:22 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.100)
+2026-05-05 20:14:26 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 10000)
+2026-05-05 20:14:26 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:16:11 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:16:11 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:16:15 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:16:24 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:20:03 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:20:03 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:20:03 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:20:03 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:20:03 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:20:06 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 20000)
+2026-05-05 20:20:06 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:21:51 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:21:51 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:21:54 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:22:02 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:23:55 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:23:55 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:23:55 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:23:55 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:23:55 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:23:58 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 30000)
+2026-05-05 20:23:58 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:25:55 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:25:55 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:25:59 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:31:23 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00002.pt
+2026-05-05 20:31:23 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:31:31 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:32:46 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:33:06 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:33:07 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:33:07 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:33:07 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:33:07 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:33:11 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 50000)
+2026-05-05 20:33:11 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:35:20 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:35:20 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:35:23 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:40:27 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00002.pt
+2026-05-05 20:40:28 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:40:34 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:46:18 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00003.pt
+2026-05-05 20:46:18 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:46:25 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:47:24 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:47:33 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:47:33 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:47:33 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:47:33 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:47:33 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:47:36 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 80000)
+2026-05-05 20:47:36 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:49:54 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:49:54 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:49:57 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:54:24 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:54:33 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:54:33 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:54:33 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:54:33 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:54:33 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:54:36 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 90000)
+2026-05-05 20:54:36 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:56:33 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 20:56:33 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 20:56:40 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 20:58:29 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 20:58:36 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 20:58:36 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 20:58:36 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 20:58:36 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 20:58:36 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 20:58:39 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 100000)
+2026-05-05 20:58:39 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:00:23 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\checkpoint_00001.pt
+2026-05-05 21:00:23 | INFO     | agent.dqn_agent | Agent saved: models\saved_models\dqn_pokemon_blue_v1\latest.pt
+2026-05-05 21:00:26 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:04:58 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 21:05:06 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 21:05:06 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 21:05:06 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 21:05:06 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 21:05:06 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 21:05:09 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 110000)
+2026-05-05 21:05:09 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:06:50 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:07:48 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 21:09:04 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 21:09:05 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 21:09:05 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 21:09:05 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 21:09:05 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 21:09:09 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 110000)
+2026-05-05 21:09:09 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:11:09 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:16:12 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 21:18:48 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 21:18:48 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 21:18:48 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 21:18:48 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 21:18:48 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 21:18:51 | INFO     | agent.dqn_agent | Agent loaded: models\saved_models\dqn_pokemon_blue_v1\latest.pt  (Step: 110000)
+2026-05-05 21:18:51 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:20:50 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 21:26:19 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 22:30:28 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 22:30:28 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 22:30:28 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 22:30:28 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 22:31:16 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 22:31:16 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 22:31:16 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 22:31:16 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 22:31:16 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 22:31:19 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 22:34:15 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 22:37:04 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-05 22:38:09 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-05 22:38:09 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-05 22:38:09 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-05 22:38:09 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-05 22:38:09 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-05 22:38:12 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-05 22:40:29 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-06 11:12:48 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-06 11:12:48 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-06 11:12:48 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-06 11:12:49 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-06 11:12:49 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-06 11:12:52 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-06 11:14:39 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-06 11:16:29 | INFO     | __main__ | Training interrupted by user. Exiting cleanly.
+2026-05-06 16:01:10 | INFO     | utils.logging_utils | Logging initialised → experiments\training_logs\dqn_pokemon_blue_v1\train.log
+2026-05-06 16:01:10 | INFO     | utils.logging_utils | TensorBoard writer initialised at: experiments\training_logs\dqn_pokemon_blue_v1
+2026-05-06 16:01:10 | INFO     | __main__ | Starting training run: dqn_pokemon_blue_v1
+2026-05-06 16:01:10 | INFO     | agent.dqn_agent | DQNAgent initialising on device: cpu
+2026-05-06 16:01:10 | INFO     | agent.dqn_agent | ForwardModel enabled  (latent_dim=512, lambda_ssl=0.050)
+2026-05-06 16:01:13 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null
+2026-05-06 16:03:06 | INFO     | utils.emulator_utils | Loading emulator: rom=roms/pokemon_blue.gb  window=null

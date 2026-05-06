@@ -39,7 +39,7 @@ training:
   eval_freq: 50                    # Evaluate every N episodes
   eval_episodes: 5
   save_freq: 1                 # Save model every N episodes
-  log_freq: 10                     # Log metrics every N episodes
+  log_freq: 1                     # Log metrics every N episodes
   checkpoint_dir: "models/saved_models"
   log_dir: "experiments/training_logs"
   experiment_name: "dqn_pokemon_blue_v1"

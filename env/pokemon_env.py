@@ -2,6 +2,7 @@
 
 
 import logging
+from collections import Counter
 from typing import Any, Dict, Optional, Tuple
 
 import numpy as np
@@ -29,8 +30,10 @@ from env.reward_system import (
 from utils.emulator_utils import (
     get_screen_array,
     load_emulator,
+    read_byte,
     read_game_state,
     send_action,
+    MemoryMap,
 )
 
 logger = logging.getLogger(__name__)
@@ -91,6 +94,11 @@ class PokemonBlueEnv(gym.Env):
         self._episode = 0
         self._prev_state: Optional[GameState] = None
         self._total_reward = 0.0
+        # Grace period: ignore termination for this many steps after reset
+        # to avoid false blackouts while memory initialises after choosing a starter.
+        self._grace_steps: int = 0
+        # Cumulative tile visit counts across all episodes for heatmap generation.
+        self._tile_visit_counts: Counter = Counter()
 
 
     def reset(
@@ -146,6 +154,9 @@ class PokemonBlueEnv(gym.Env):
         self._step_count = 0
         self._episode += 1
         self._total_reward = 0.0
+        # Allow 30 steps before we accept a termination signal so that
+        # partially-initialised party HP cannot trigger a false game-over.
+        self._grace_steps = 30
 
         self._reward_system.reset()
 
@@ -166,6 +177,12 @@ class PokemonBlueEnv(gym.Env):
 
         assert self._pyboy is not None
 
+        # If we entered a battle, auto-fight through it instead of letting the
+        # agent act. This works for both wild and trainer battles (running is
+        # disabled for trainer battles, so we always fight).
+        if self._prev_state is not None and self._prev_state.in_battle:
+            self._skip_battle()
+
         press_event, release_event = ACTION_TO_PYBOY_EVENTS[action]
 
         send_action(
@@ -185,14 +202,35 @@ class PokemonBlueEnv(gym.Env):
         state_dict = read_game_state(self._pyboy)
         curr_state = GameState(**state_dict)
 
+        # Track tile visits for heatmap (only in overworld, not in battle).
+        if not curr_state.in_battle:
+            tile_key = (curr_state.map_id, curr_state.player_x, curr_state.player_y)
+            self._tile_visit_counts[tile_key] += 1
+
         reward = self._reward_system.compute(self._prev_state, curr_state)
+
+        # Detect battle-exit: the game runs a fade/transition back to the
+        # overworld during which HP bytes can temporarily read as 0.
+        # Refresh the grace period so those transient zeroes don't look like
+        # a black-out to _is_terminated().
+        just_left_battle = (
+            self._prev_state is not None
+            and self._prev_state.in_battle
+            and not curr_state.in_battle
+        )
+        if just_left_battle:
+            self._grace_steps = max(self._grace_steps, 30)
 
         self._prev_state = curr_state
 
         self._total_reward += reward
         self._step_count += 1
 
-        terminated = self._is_terminated(curr_state)
+        if self._grace_steps > 0:
+            self._grace_steps -= 1
+            terminated = False
+        else:
+            terminated = self._is_terminated(curr_state)
         truncated = self._step_count >= self.max_steps
 
         info = self._build_info()
@@ -221,13 +259,49 @@ class PokemonBlueEnv(gym.Env):
                 self._episode,
             )
 
- 
-    def _is_terminated(self, state: GameState):
 
-        if state.party_hp and all(hp == 0 for hp in state.party_hp):
-            return True
+    def _skip_battle(self) -> None:
+        """Auto-fight through any battle (wild or trainer) by spamming A.
 
-        return False
+        Presses A repeatedly — which advances dialogue, selects FIGHT, picks
+        the first move, and confirms — until the IN_BATTLE memory flag clears.
+        A safety cap prevents an infinite loop if something unexpected happens.
+        """
+        from pyboy.utils import WindowEvent
+
+        max_frames = 6000  # ~100 s at 60 fps; near-instant at speed 0
+        for _ in range(max_frames):
+            if read_byte(self._pyboy, MemoryMap.IN_BATTLE) == 0:
+                break
+            self._pyboy.send_input(WindowEvent.PRESS_BUTTON_A)
+            for _ in range(8):
+                self._pyboy.tick()
+            self._pyboy.send_input(WindowEvent.RELEASE_BUTTON_A)
+            self._pyboy.tick()
+
+        # Give memory time to repopulate overworld party data.
+        self._grace_steps = max(self._grace_steps, 30)
+        logger.debug("Battle auto-skipped.")
+
+    def _is_terminated(self, state: GameState) -> bool:
+        """Return True only on a genuine black-out (all party Pokémon fainted).
+
+        Guards against false positives that occur right after the player picks
+        a starter at Oak's lab, when memory hasn't fully populated the party
+        data yet (HP bytes read as 0 before the Pokémon is written in).
+        """
+        # Need at least one Pokémon in the party.
+        if not state.party_hp:
+            return False
+
+        # A real party always has at least one Pokémon with a non-zero level.
+        # If every level slot is 0 the data hasn't been written yet – not a
+        # real black-out.
+        if not state.party_levels or all(lv == 0 for lv in state.party_levels):
+            return False
+
+        # Genuine black-out: every Pokémon in the party has 0 HP.
+        return all(hp == 0 for hp in state.party_hp)
 
     def _build_info(self):
 
@@ -242,5 +316,9 @@ class PokemonBlueEnv(gym.Env):
 
     @property
     def exploration_stats(self):
-
         return self._reward_system.get_exploration_stats()
+
+    @property
+    def tile_visit_counts(self) -> Counter:
+        """Counter mapping (map_id, x, y) -> visit count across all episodes."""
+        return self._tile_visit_counts

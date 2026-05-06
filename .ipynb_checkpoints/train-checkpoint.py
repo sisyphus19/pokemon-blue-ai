@@ -1,4 +1,3 @@
-
 # initialize env and loag config, then run exp and gradient descent storage
 import argparse
 import logging
@@ -12,6 +11,7 @@ from colorama import Fore, Style, init
 from agent import DQNAgent
 from env import PokemonBlueEnv
 from utils import EpisodeLogger, TensorBoardLogger, setup_logging
+from utils.visualization import plot_training_dashboard, plot_exploration_heatmaps
 
 init(autoreset=True)
 logger = logging.getLogger(__name__)
@@ -60,8 +60,10 @@ def train(config: dict) -> None:
     # Check for existing checkpoint
     latest_checkpoint = model_dir / "latest.pt"
     if latest_checkpoint.exists():
-        logger.info("Resuming from %s", latest_checkpoint)
-        agent.load(str(latest_checkpoint))
+        try:
+            agent.load(str(latest_checkpoint))
+        except RuntimeError:
+            print("Checkpoint incompatible, starting fresh.")
 
     # Training Loop 
     start_time = time.time()
@@ -89,11 +91,17 @@ def train(config: dict) -> None:
             total_steps += 1
 
             # 4. Train network
-            loss = agent.train_step()
-            if loss is not None:
-                episode_losses.append(loss)
+            step_result = agent.train_step()
+            if step_result is not None:
+                episode_losses.append(step_result)
 
-        avg_loss = float(np.mean(episode_losses)) if episode_losses else 0.0
+        if episode_losses:
+            avg_rl_loss    = float(np.mean([l["rl_loss"]    for l in episode_losses]))
+            avg_ssl_loss   = float(np.mean([l["ssl_loss"]   for l in episode_losses]))
+            avg_total_loss = float(np.mean([l["total_loss"] for l in episode_losses]))
+        else:
+            avg_rl_loss = avg_ssl_loss = avg_total_loss = 0.0
+        avg_loss = avg_total_loss  # kept for display / csv backward compat
         exp_stats = env.exploration_stats
         
         # Determine console colour based on outcome
@@ -110,22 +118,25 @@ def train(config: dict) -> None:
             f"Reward: {episode_reward:7.2f} | "
             f"Tiles: {exp_stats['tiles_visited']:4d} | "
             f"Eps: {agent.epsilon:.3f} | "
-            f"Loss: {avg_loss:.4f}"
+            f"RL: {avg_rl_loss:.4f} | SSL: {avg_ssl_loss:.4f}"
         )
         print(msg)
 
+        # --- Logging ---
         if episode % train_cfg["log_freq"] == 0:
             csv_logger.log(
                 episode=episode,
                 total_reward=episode_reward,
                 episode_length=step_info["step"],
                 epsilon=agent.epsilon,
+                rl_loss=avg_rl_loss if episode_losses else None,
+                ssl_loss=avg_ssl_loss if episode_losses else None,
+                total_loss=avg_total_loss if episode_losses else None,
                 loss=avg_loss if episode_losses else None,
                 tiles_visited=exp_stats["tiles_visited"],
                 maps_visited=exp_stats["maps_visited"],
             )
-            
-
+        
             tb_logger.scalars(
                 {
                     "Reward/Episode": episode_reward,
@@ -133,20 +144,24 @@ def train(config: dict) -> None:
                     "Exploration/Epsilon": agent.epsilon,
                     "Exploration/UniqueTiles": exp_stats["tiles_visited"],
                     "Exploration/UniqueMaps": exp_stats["maps_visited"],
-                    "Loss/Average": avg_loss,
+                    "Loss/Total": avg_total_loss,
+                    "Loss/RL": avg_rl_loss,
+                    "Loss/SSL": avg_ssl_loss,
                 },
                 step=total_steps,
             )
-
+        
+        # --- Visualization (independent of logging) ---
         if episode % train_cfg["save_freq"] == 0:
-            agent.save(str(model_dir / f"checkpoint_{episode:05d}.pt"))
-            agent.save(str(latest_checkpoint))
-            
-            # Generate visualisations
-            from utils.visualization import plot_training_dashboard
             plot_training_dashboard(
                 log_csv_path=str(log_dir / "episode_log.csv"),
                 save_path=str(log_dir / "dashboard.png")
+            )
+        
+        if episode % (train_cfg["save_freq"] * 5) == 0:
+            plot_exploration_heatmaps(
+                tile_visit_counts=env.tile_visit_counts,
+                save_dir=str(log_dir / "heatmaps"),
             )
 
     # Cleanup
